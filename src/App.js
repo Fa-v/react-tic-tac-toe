@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import './index.css';
 
 function Square(props) {
@@ -119,12 +118,14 @@ class App extends Component {
     return (
       <div className="game">
         <div className="board">
+          {(result)
+            ? <p className="winner">{result === null ? '' : '🏆 The winner is: ' + result}</p>
+            : <p>{xPlayer ? 'X\'s turn' : 'O\'s turn'}</p>
+          }
           <Board
             squares={squares}
             onClick={(squareIndex) => this.handleClick(squareIndex)} />
-          <p>{xPlayer ? 'X\'s turn' : 'O\'s turn'}</p>
-          <p>{_.isNull(result) ? '' : 'The winner is: ' + result}</p>
-          <button onClick={() => this.resetBoard()}>{'Reset'}</button>
+          <button className="reset" onClick={() => this.resetBoard()}>{'Reset'}</button>
         </div>
       </div>
     );
